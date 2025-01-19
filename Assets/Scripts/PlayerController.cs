@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -21,6 +22,11 @@ public class PlayerController : MonoBehaviour
         Vector3 movement = new Vector3(moveX, 0, moveZ) * speed * Time.deltaTime;
 
         transform.Translate(movement, Space.World);
+
+        if (health == 0) {
+            Debug.Log("Game Over!");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 
     void OnTriggerEnter(Collider other) {
