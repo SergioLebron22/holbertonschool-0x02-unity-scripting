@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 5f;
+    private int score = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -18,5 +19,13 @@ public class PlayerController : MonoBehaviour
         Vector3 movement = new Vector3(moveX, 0, moveZ) * speed * Time.deltaTime;
 
         transform.Translate(movement, Space.World);
+    }
+
+    void OnTriggerEnter(Collider other) {
+        if (other.CompareTag("Pickup")) {
+            score++;
+            Debug.Log($"Score: {score}");
+            other.gameObject.SetActive(false);
+        }
     }
 }
